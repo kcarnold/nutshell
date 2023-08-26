@@ -1118,7 +1118,9 @@ Bubble: the box that expands below an expandable, containing a Nutshell Section
                         // Folded sections need to convert relative links to absolute
                         _convertRelativeToAbsoluteLinks("a", "href", url, safeEl);
                         // Article is assumed to be the container of the first <p>
-                        let assumedArticle = safeEl.querySelector('p').parentNode;
+                        // unless there's a <main>, in which case that's the main.
+                        let mainTag = safeEl.querySelector('main');
+                        let assumedArticle = mainTag ? mainTag : safeEl.querySelector('p').parentNode;
                         resolve(assumedArticle);
                         return;
                     }
